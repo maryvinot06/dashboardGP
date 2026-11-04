@@ -1,0 +1,4 @@
+*.xlsx
+# открытые данные и отчёт не публикуем (репозиторий публичный)
+report/data.json
+report/goodpoint_*.html

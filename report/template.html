@@ -1,0 +1,396 @@
+<title>Good Point · октябрь 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: одна колонка ~1120px, разделы сверху вниз в порядке «итог → детали», фирменный тёплый фон Good Point */
+:root{
+  --bg:#f8f3ec; --surface:#fffdf9; --ink:#2a2622; --muted:#7a6f66; --faint:#a89c90; --line:#ecdfd2;
+  --accent:#d9643a; --accent-soft:#fde3d6;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#6250d6;
+  --good:#0ca30c; --bad:#d03b3b;
+  --display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1b1815; --surface:#25211d; --ink:#f2ebe3; --muted:#b9ada1; --faint:#8a7f74; --line:#3a332c;
+  --accent:#f09a74; --accent-soft:#4a2e22; --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#9085e9;
+  --good:#3ccf3c; --bad:#e66767; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1b1815; --surface:#25211d; --ink:#f2ebe3; --muted:#b9ada1; --faint:#8a7f74; --line:#3a332c;
+  --accent:#f09a74; --accent-soft:#4a2e22; --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#9085e9;
+  --good:#3ccf3c; --bad:#e66767; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--body);margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;border-bottom:1px solid var(--line);padding-bottom:18px}
+.brand{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.01em}
+.brand i{font-style:normal;color:var(--accent);font-weight:500;font-size:14px;margin-left:6px}
+nav.toc{display:flex;flex-wrap:wrap;gap:4px;margin-left:auto}
+nav.toc a{color:var(--muted);text-decoration:none;padding:6px 12px;border-radius:999px;font-weight:500;font-size:14px}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--accent-soft);color:var(--accent);outline:none}
+.period{display:inline-flex;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.period b{color:var(--ink)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(26px,4vw,34px);margin:30px 0 4px;letter-spacing:-.02em;text-wrap:balance}
+h1 span{font-family:var(--body);font-weight:400;font-size:.62em;color:var(--muted);margin-left:10px;letter-spacing:0}
+.lede{color:var(--muted);max-width:68ch;margin:0 0 8px}
+section{margin-top:48px}
+h2{font-family:var(--display);font-weight:700;font-size:22px;margin:0 0 4px;letter-spacing:-.01em;text-wrap:balance}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:26px 0 12px}
+.note{font-size:13px;color:var(--muted);max-width:75ch}
+.grid{display:grid;gap:16px}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:900px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3,.g2{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:440px){.g4{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px 22px;min-width:0}
+.tile .lab{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.tile .num{font-family:var(--display);font-weight:700;font-size:40px;line-height:1.1;margin:10px 0 6px;font-variant-numeric:tabular-nums}
+.tile .sub{font-size:13px;color:var(--muted)}
+.tile.hl{background:var(--accent-soft);border-color:transparent}
+.tile.hl .lab{color:var(--accent)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:3px;vertical-align:baseline;margin-right:6px}
+.card h3{font-size:15px;font-weight:700;margin:0 0 2px}
+.card .cap{font-size:13px;color:var(--muted);margin:0 0 14px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted);margin-bottom:8px}
+/* горизонтальные бары */
+.hb{display:grid;grid-template-columns:minmax(120px,max-content) minmax(0,1fr) auto;gap:6px 12px;align-items:center;font-size:13.5px}
+.hb .l{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:290px}
+.hb .t{height:14px;position:relative;display:flex;gap:2px}
+.hb .b{height:100%;border-radius:0 4px 4px 0;min-width:2px}
+.hb .v{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.hb .v small{color:var(--muted);margin-left:6px;display:inline-block;min-width:44px}
+.hb .row{display:contents}
+.hb .row:hover .l,.hb .row:hover .v{color:var(--accent)}
+/* stacked ratio */
+.ratio{display:flex;height:28px;gap:2px;margin:6px 0 10px}
+.ratio div{height:100%}
+.ratio div:first-child{border-radius:6px 0 0 6px}.ratio div:last-child{border-radius:0 6px 6px 0}
+svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{fill:var(--muted);font:12px var(--body)}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{padding:7px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+td.heat{text-align:center;min-width:46px}
+tr.tot td{font-weight:700;border-top:2px solid var(--line)}
+.up{color:var(--good)}.down{color:var(--bad)}
+.pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;padding:2px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent);text-transform:uppercase}
+.src td:first-child{white-space:normal}
+ul.facts{margin:0;padding-left:18px}ul.facts li{margin:6px 0;max-width:80ch}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12.5px;padding:7px 10px;border-radius:8px;z-index:50;max-width:260px;line-height:1.4;opacity:0;transition:opacity .08s}
+.tip.on{opacity:1}
+@media (prefers-reduced-motion:reduce){.tip{transition:none}}
+footer{margin-top:56px;font-size:12.5px;color:var(--faint)}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="brand">Good Point<i>аналитика</i></div>
+  <nav class="toc" aria-label="Разделы">
+    <a href="#data">Данные</a><a href="#overview">Обзор</a><a href="#psy">Психологи</a><a href="#tr">Стажёры</a><a href="#new">Обращения</a><a href="#promo">Промокоды</a><a href="#summary">Выводы</a>
+  </nav>
+</header>
+
+<h1>Октябрь 2026<span>сессии, обращения, промокоды</span></h1>
+<p class="lede">Отчёт собран из трёх выгрузок: оплаты психологов, записи к стажёрам и сделки по новым клиентам. <span class="period">Период данных: <b id="periodTxt"></b></span></p>
+
+<section id="data">
+  <h2>Что в исходных таблицах</h2>
+  <p class="note">Перед расчётами разобрана структура каждого файла. Ниже — что представляет одна строка и какие показатели из неё можно получить.</p>
+  <div class="card scroll" style="margin-top:14px">
+    <table class="src">
+      <thead><tr><th>Таблица</th><th style="text-align:left">Столбцы</th><th style="text-align:left">Одна строка</th><th style="text-align:left">Даты</th><th>Строк</th></tr></thead>
+      <tbody>
+        <tr><td><b>Психологи</b></td><td style="text-align:left;white-space:normal">Дата создания · Дата записи 1 (услуга + специалист) · PROMOCODE · COMMENT (пусто) · REFERER</td><td style="text-align:left;white-space:normal">Запись об оплате/записи к психологу. Имя специалиста извлечено из текста «Дата записи 1»</td><td style="text-align:left;white-space:normal">«Дата создания», 01–31.10.2026</td><td id="srcPsy"></td></tr>
+        <tr><td><b>Стажёры</b></td><td style="text-align:left;white-space:normal">Этап сделки (= имя стажёра) · Дата создания · PROMOCODE · DELIVERY_PRICE (пусто) · REFERER · utm_content/medium/campaign/source/term</td><td style="text-align:left;white-space:normal">Сессия у стажёра</td><td style="text-align:left;white-space:normal">«Дата создания», 01–31.10.2026</td><td id="srcTr"></td></tr>
+        <tr><td><b>Новые клиенты</b></td><td style="text-align:left;white-space:normal">Один столбец «Сделки» — список адресов страниц, с которых пришли заявки</td><td style="text-align:left;white-space:normal">Сделка (карточка обращения); внутри может быть 1–5 заявок</td><td style="text-align:left;white-space:normal"><b>Дат нет</b></td><td id="srcNew"></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Что можно рассчитать</h3>
+      <ul class="facts note" style="color:var(--ink)">
+        <li>Сессии психологов и стажёров: всего, по специалистам, по неделям и дням октября.</li>
+        <li>Новые обращения: число сделок и заявок, тип страницы, с которой пришла заявка, UTM-источник из адреса.</li>
+        <li>Промокоды: в таблицах психологов и стажёров, с датами.</li>
+      </ul></div>
+    <div class="card"><h3>Принятые допущения</h3>
+      <ul class="facts note" style="color:var(--ink)">
+        <li>Одна строка = одна сессия. Строка с покупкой пакета консультаций тоже считается одной записью (один пакет = одна строка) и на отдельные сессии не раскладывается.</li>
+        <li>Динамика строится по «Дате создания» записи: у части строк дата самой сессии не указана.</li>
+        <li>Объединены варианты написания одного специалиста (подтверждено): «настя осипова» → Анастасия Осипова, «Даша/Дарья Бахтеева», «Ксюша/Ксения Карпова», регистр букв («АННА СКОМОРОХ»).</li>
+        <li>Цены из выгрузки в отчёт не включены.</li>
+      </ul></div>
+  </div>
+</section>
+
+<section id="overview">
+  <h2>1. Общая статистика</h2>
+  <div class="eyebrow">Проведённые сессии и обращения за октябрь</div>
+  <div class="grid g4" id="kpis"></div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Нагрузка: психологи и стажёры</h3><p class="cap">Доля от всех проведённых сессий центра</p><div id="ratio"></div></div>
+    <div class="card"><h3>Помесячная динамика</h3><p class="cap">Сравнение месяцев недоступно</p>
+      <p class="note" style="color:var(--ink)">Во всех трёх таблицах есть только <b>октябрь 2026</b>. Сравнить с сентябрём или ноябрём нельзя — данных за эти месяцы в файлах нет. Вместо месяцев ниже показана динамика <b>по неделям и по дням</b> внутри октября.</p></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h3>Сессии по неделям</h3><p class="cap">Неделя = пн–вс. Первая (1–4 окт) и последняя (26–31 окт) недели неполные — они отмечены звёздочкой, для сравнения используйте среднее в день в таблице ниже</p>
+    <div class="legend"><span><i class="dot" style="background:var(--s1)"></i>Психологи</span><span><i class="dot" style="background:var(--s2)"></i>Стажёры</span></div>
+    <div id="weekBars"></div></div>
+  <div class="card scroll" style="margin-top:16px"><h3>Изменение к предыдущей неделе</h3><p class="cap">Δ считается по среднему числу сессий в день, чтобы неполные недели сравнивались корректно</p><div id="weekTable"></div></div>
+  <div class="card" style="margin-top:16px"><h3>Сессии по дням</h3><p class="cap">Число записей в таблицах по дате создания. Наведите курсор на график, чтобы увидеть значения за день</p>
+    <div class="legend"><span><i class="dot" style="background:var(--s1)"></i>Психологи</span><span><i class="dot" style="background:var(--s2)"></i>Стажёры</span></div>
+    <div id="dayLine"></div></div>
+</section>
+
+<section id="psy">
+  <h2>2. Психологи</h2>
+  <div class="eyebrow" id="psyEyebrow"></div>
+  <div class="grid g2">
+    <div class="card"><h3>Рейтинг по числу сессий</h3><p class="cap">Сессий за октябрь и доля от всех сессий психологов</p><div id="psyRank"></div></div>
+    <div class="grid" style="align-content:start">
+      <div class="card"><h3>Концентрация нагрузки</h3><p class="cap">Сколько сессий приходится на лидеров</p><div id="psyConc"></div></div>
+      <div class="card"><h3>Типы строк в таблице психологов</h3><p class="cap">Каждая строка считается одной сессией</p><div id="psyKinds"></div><p class="note" id="psyPackNote"></p></div>
+    </div>
+  </div>
+  <div class="card scroll" style="margin-top:16px"><h3>Динамика по неделям</h3><p class="cap">Сессии каждого психолога по неделям октября. Чем насыщеннее цвет, тем больше сессий. * — неполная неделя</p><div id="psyHeat"></div></div>
+</section>
+
+<section id="tr">
+  <h2>3. Стажёры</h2>
+  <div class="eyebrow" id="trEyebrow"></div>
+  <div class="grid g2">
+    <div class="card"><h3>Рейтинг по числу сессий</h3><p class="cap">Сессий за октябрь и доля от всех сессий стажёров</p><div id="trRank"></div></div>
+    <div class="card scroll"><h3>Динамика по неделям</h3><p class="cap">Сессии каждого стажёра по неделям. * — неполная неделя</p><div id="trHeat"></div></div>
+  </div>
+  <div class="card scroll" style="margin-top:16px"><h3>UTM-метки в записях к стажёрам</h3><p class="cap">Значения из столбцов utm_source / utm_medium / utm_campaign как есть. В части строк поля, судя по значениям, заполнены в другом порядке (например, source = scienceclub, medium = telegram) — они не исправлялись</p>
+    <div class="grid g2"><div id="trUtm"></div><div id="trUtmCombo"></div></div></div>
+</section>
+
+<section id="new">
+  <h2>4. Новые обращения</h2>
+  <div class="eyebrow">Таблица новых клиентов · одна строка = одна сделка</div>
+  <div class="grid g4" id="newKpis"></div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>С какой страницы пришла сделка</h3><p class="cap">Если все заявки сделки пришли со страниц одного типа — сделка отнесена к нему; если с разных — «Несколько типов страниц»</p><div id="newType"></div></div>
+    <div class="card"><h3>Охват страниц</h3><p class="cap">В скольких сделках встречается хотя бы одна заявка со страницы этого типа. Одна сделка может попасть в несколько строк, поэтому сумма больше <span id="newTot2"></span></p><div id="newTouch"></div></div>
+  </div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Источник привлечения (utm_source)</h3><p class="cap">Метка utm_source из адресов заявок. Если метки нет — «Не указан»</p><div id="newUtm"></div></div>
+    <div class="card"><h3>Заявок в одной сделке</h3><p class="cap">Сколько адресов «Lead from / Заявка с» записано в одной сделке</p><div id="newLeads"></div></div>
+  </div>
+  <p class="note" style="margin-top:14px">В таблице новых клиентов нет дат, поэтому динамику обращений по месяцам и неделям и изменения в структуре источников во времени построить нельзя. Тип страницы показывает, где человек оставил заявку, а не рекламный канал, через который он пришёл.</p>
+</section>
+
+<section id="promo">
+  <h2>5. Промокоды</h2>
+  <div class="eyebrow">Столбец PROMOCODE в таблицах психологов и стажёров</div>
+  <div class="grid g4" id="promoKpis"></div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Популярность промокодов</h3><p class="cap">Число сессий с промокодом</p>
+      <div class="legend"><span><i class="dot" style="background:var(--s1)"></i>Психологи</span><span><i class="dot" style="background:var(--s2)"></i>Стажёры</span></div>
+      <div id="promoRank"></div></div>
+    <div class="grid" style="align-content:start">
+      <div class="card"><h3>Использование по неделям</h3><p class="cap">Сессии с промокодом. * — неполная неделя</p>
+        <div class="legend"><span><i class="dot" style="background:var(--s1)"></i>Психологи</span><span><i class="dot" style="background:var(--s2)"></i>Стажёры</span></div>
+        <div id="promoWeek"></div></div>
+      <div class="card scroll"><h3>Доля сессий с промокодом</h3><p class="cap">От всех сессий недели</p><div id="promoShare"></div></div>
+    </div>
+  </div>
+  <p class="note" style="margin-top:14px">В таблице новых клиентов промокодов нет, поэтому связь «промокод → новое обращение» установить нельзя.</p>
+</section>
+
+<section id="summary">
+  <h2>6. Выводы</h2>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card"><h3>Что показывают данные</h3><ul class="facts" id="facts"></ul></div>
+    <div class="card"><h3>Ограничения анализа</h3>
+      <ul class="facts">
+        <li>Все таблицы содержат только октябрь 2026: помесячную динамику и сравнение с прошлым месяцем построить нельзя.</li>
+        <li>В таблице новых клиентов нет дат — нет динамики обращений и источников во времени.</li>
+        <li>utm_source есть только в адресах части заявок; у большинства сделок источник не указан. Тип страницы — это место заявки, а не канал привлечения.</li>
+        <li>Нет идентификаторов клиентов: уникальных и повторных клиентов не считали, записи между таблицами не сопоставляли.</li>
+        <li>Одна строка считается одной записью. 14 строк психологов — покупка пакета на 5 или 10 консультаций; каждая учтена как одна строка, сколько сессий из пакета уже проведено, по таблице не видно.</li>
+        <li>Динамика идёт по дате создания записи. Для 22 записей «на время» сессия назначена на другой день, в том числе на 2 ноября.</li>
+        <li>Причины изменений (реклама, сезонность, отпуска специалистов) по этим данным установить нельзя.</li>
+      </ul></div>
+  </div>
+</section>
+
+<footer>Good Point · внутренняя аналитика · источник: три Excel-выгрузки за октябрь 2026</footer>
+</div>
+<div class="tip" id="tip" role="status"></div>
+
+<script>
+const D = /*DATA*/null;
+const $ = s => document.querySelector(s);
+const fmt = n => n.toLocaleString('ru-RU');
+const pct = (a,b,d=1) => b ? (a/b*100).toFixed(d).replace('.',',')+'%' : '—';
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const MON = ['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'];
+const dd = iso => {const [y,m,d]=iso.split('-').map(Number);return {d,m:MON[m-1]}};
+const wlabel = w => {const a=dd(w.start),b=dd(w.end);return `${a.d}–${b.d} ${b.m}${w.days<7?'*':''}`};
+const W = D.weeks;
+const REDRAW=[];let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>REDRAW.forEach(f=>f()),150)});
+
+/* tooltip */
+const tip=$('#tip');
+document.addEventListener('mousemove',e=>{
+  const t=e.target.closest('[data-tip]');
+  if(!t){tip.classList.remove('on');return}
+  tip.innerHTML=t.dataset.tip;tip.classList.add('on');
+  const x=Math.min(e.clientX+14,innerWidth-tip.offsetWidth-8), y=e.clientY+16+tip.offsetHeight>innerHeight?e.clientY-tip.offsetHeight-10:e.clientY+16;
+  tip.style.left=x+'px';tip.style.top=y+'px';
+});
+document.addEventListener('scroll',()=>tip.classList.remove('on'),{passive:true});
+
+function tiles(el, arr){ $(el).innerHTML = arr.map(t=>`<div class="card tile${t.hl?' hl':''}"><div class="lab">${t.lab}</div><div class="num">${t.num}</div><div class="sub">${t.sub}</div></div>`).join(''); }
+
+/* горизонтальные бары: items [{label, parts:[{v,color}], total, share}] */
+function hbars(el, items, {max, shareOf, unit='сес.'}={}){
+  max = max || Math.max(...items.map(i=>i.total));
+  $(el).innerHTML = `<div class="hb">${items.map(i=>{
+    const tipTxt = `<b>${esc(i.label)}</b><br>${fmt(i.total)} ${unit}${shareOf?` · ${pct(i.total,shareOf)}`:''}${i.parts.length>1?'<br>'+i.parts.map(p=>`${p.name}: ${p.v}`).join(' · '):''}`;
+    return `<div class="row" data-tip="${esc(tipTxt)}"><div class="l" title="${esc(i.label)}">${esc(i.label)}</div><div class="t">${i.parts.filter(p=>p.v>0).map(p=>`<div class="b" style="width:${p.v/max*100}%;background:${p.color}"></div>`).join('')}</div><div class="v">${fmt(i.total)}${shareOf?`<small>${pct(i.total,shareOf)}</small>`:''}</div></div>`}).join('')}</div>`;
+}
+const simple = (arr,color,shareOf,unit) => arr.map(([label,v])=>({label,total:v,parts:[{v,color}]}));
+
+/* сгруппированные столбцы по неделям */
+function groupBars(el, series){
+  REDRAW.push(()=>groupBars0(el,series));groupBars0(el,series)}
+function groupBars0(el, series){
+  const w=Math.max(300,$(el).clientWidth||640),h=w<500?220:260,ml=36,mr=8,mt=14,mb=34, iw=w-ml-mr, ih=h-mt-mb;
+  const max=Math.max(...series.flatMap(s=>s.values)); const step=niceStep(max); const top=Math.ceil(max/step)*step||1;
+  const y=v=>mt+ih-v/top*ih; const gw=iw/W.length; const bw=Math.min(34,(gw-18)/series.length);
+  let s=`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Столбчатая диаграмма по неделям">`;
+  for(let v=0;v<=top;v+=step){s+=`<line x1="${ml}" x2="${w-mr}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/><text x="${ml-6}" y="${y(v)+4}" text-anchor="end">${v}</text>`}
+  W.forEach((wk,i)=>{
+    const cx=ml+gw*i+gw/2, x0=cx-bw*series.length/2-(series.length-1);
+    series.forEach((se,j)=>{const v=se.values[i],x=x0+j*(bw+2),yy=y(v),hh=Math.max(0,mt+ih-yy);
+      const r=Math.min(4,hh);
+      s+=`<path d="M${x},${mt+ih}V${yy+r}q0,-${r} ${r},-${r}h${bw-2*r}q${r},0 ${r},${r}V${mt+ih}Z" fill="${se.color}" data-tip="<b>${wlabel(wk)}</b> (${wk.days} дн.)<br>${se.name}: ${v}<br>в среднем ${(v/wk.days).toFixed(1).replace('.',',')} в день"/>`;
+      s+=`<text x="${x+bw/2}" y="${yy-5}" text-anchor="middle" style="fill:var(--ink);font-size:11px">${v}</text>`});
+    s+=`<text x="${cx}" y="${h-12}" text-anchor="middle">${w<520?wlabel(wk).replace(' окт',''):wlabel(wk)}</text>`;
+  });
+  $(el).innerHTML=s+'</svg>';
+}
+function niceStep(max){const raw=max/4;const p=Math.pow(10,Math.floor(Math.log10(raw||1)));for(const m of[1,2,2.5,5,10])if(raw<=m*p)return m*p;return 10*p}
+
+/* линия по дням с перекрестием */
+function dayLine(el, series){
+  REDRAW.push(()=>dayLine0(el,series));dayLine0(el,series)}
+function dayLine0(el, series){
+  const w=Math.max(300,$(el).clientWidth||900),h=w<500?220:280,ml=34,mr=10,mt=12,mb=30,iw=w-ml-mr,ih=h-mt-mb,n=D.days.length;
+  const max=Math.max(...series.flatMap(s=>s.values)),step=niceStep(max),top=Math.ceil(max/step)*step;
+  const x=i=>ml+i/(n-1)*iw, y=v=>mt+ih-v/top*ih;
+  let s=`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Линейный график по дням">`;
+  for(let v=0;v<=top;v+=step)s+=`<line x1="${ml}" x2="${w-mr}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${ml-6}" y="${y(v)+4}" text-anchor="end">${v}</text>`;
+  D.days.forEach((d,i)=>{const k=dd(d);if(k.d===1||k.d%(w<600?10:5)===0)s+=`<text x="${x(i)}" y="${h-10}" text-anchor="middle">${k.d} ${k.m}</text>`});
+  series.forEach(se=>{s+=`<path d="${se.values.map((v,i)=>(i?'L':'M')+x(i).toFixed(1)+','+y(v).toFixed(1)).join('')}" fill="none" stroke="${se.color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`});
+  s+=`<line id="xh" x1="0" x2="0" y1="${mt}" y2="${mt+ih}" stroke="var(--faint)" stroke-dasharray="3 3" visibility="hidden"/>`;
+  series.forEach((se,j)=>s+=`<circle class="xd" r="4.5" fill="${se.color}" stroke="var(--surface)" stroke-width="2" visibility="hidden"/>`);
+  s+=`<rect x="${ml}" y="${mt}" width="${iw}" height="${ih}" fill="transparent" id="hit"/></svg>`;
+  const box=$(el);box.innerHTML=s;const svg=box.querySelector('svg'),hit=svg.querySelector('#hit'),xh=svg.querySelector('#xh'),dots=svg.querySelectorAll('.xd');
+  const DOW=['вс','пн','вт','ср','чт','пт','сб'];
+  hit.addEventListener('mousemove',e=>{
+    const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const p=pt.matrixTransform(svg.getScreenCTM().inverse());
+    const i=Math.max(0,Math.min(n-1,Math.round((p.x-ml)/iw*(n-1))));
+    xh.setAttribute('x1',x(i));xh.setAttribute('x2',x(i));xh.setAttribute('visibility','visible');
+    series.forEach((se,j)=>{dots[j].setAttribute('cx',x(i));dots[j].setAttribute('cy',y(se.values[i]));dots[j].setAttribute('visibility','visible')});
+    const k=dd(D.days[i]);hit.dataset.tip=`<b>${k.d} ${k.m}, ${DOW[new Date(D.days[i]).getDay()]}</b><br>`+series.map(se=>`${se.name}: ${se.values[i]}`).join('<br>');
+  });
+  hit.addEventListener('mouseleave',()=>{xh.setAttribute('visibility','hidden');dots.forEach(d=>d.setAttribute('visibility','hidden'))});
+}
+
+/* тепловая таблица по неделям */
+function heat(el, byName, order, color){
+  const max=Math.max(...order.map(n=>Math.max(...byName[n])));
+  let t=`<table><thead><tr><th>Специалист</th>${W.map(w=>`<th style="text-align:center">${wlabel(w)}</th>`).join('')}<th>Всего</th></tr></thead><tbody>`;
+  order.forEach(n=>{const v=byName[n];t+=`<tr><td>${esc(n)}</td>${v.map((x,i)=>{const p=x?Math.round(12+x/max*78):0;return `<td class="heat" style="background:${x?`color-mix(in oklab, ${color} ${p}%, var(--surface))`:'transparent'};color:${p>55?'#fff':'var(--ink)'}" data-tip="<b>${esc(n)}</b><br>${wlabel(W[i])}: ${x}">${x||'·'}</td>`}).join('')}<td><b>${v.reduce((a,b)=>a+b,0)}</b></td></tr>`});
+  const tot=W.map((_,i)=>order.reduce((a,n)=>a+byName[n][i],0));
+  t+=`<tr class="tot"><td>Итого</td>${tot.map(x=>`<td style="text-align:center">${x}</td>`).join('')}<td>${tot.reduce((a,b)=>a+b,0)}</td></tr></tbody></table>`;
+  $(el).innerHTML=t;
+}
+function delta(cur,prev){if(prev==null)return '<span class="note">—</span>';const d=(cur-prev)/prev*100;const c=d>=0?'up':'down';return `<span class="${c}">${d>=0?'▲ +':'▼ '}${d.toFixed(0)}%</span>`}
+
+/* ---------- рендер ---------- */
+const P=D.psy,T=D.tr,N=D.new,PR=D.promo, ALL=P.total+T.total;
+$('#periodTxt').textContent='1–31 октября 2026';
+$('#srcPsy').textContent=P.total;$('#srcTr').textContent=T.total;$('#srcNew').textContent=N.total;
+
+tiles('#kpis',[
+  {lab:'Все сессии центра',num:fmt(ALL),sub:`психологи + стажёры`,hl:1},
+  {lab:'Сессии психологов',num:fmt(P.total),sub:`<i class="dot" style="background:var(--s1)"></i>${pct(P.total,ALL)} · ${P.by_name.length} специалистов`},
+  {lab:'Сессии стажёров',num:fmt(T.total),sub:`<i class="dot" style="background:var(--s2)"></i>${pct(T.total,ALL)} · ${T.by_name.length} стажёров`},
+  {lab:'Новые обращения',num:fmt(N.total),sub:`сделок · в них ${N.leads_total} заявок. Не входят в число сессий`}
+]);
+$('#ratio').innerHTML=`<div class="ratio"><div style="width:${P.total/ALL*100}%;background:var(--s1)" data-tip="Психологи: ${P.total} (${pct(P.total,ALL)})"></div><div style="width:${T.total/ALL*100}%;background:var(--s2)" data-tip="Стажёры: ${T.total} (${pct(T.total,ALL)})"></div></div>
+<div class="legend" style="justify-content:space-between"><span><i class="dot" style="background:var(--s1)"></i>Психологи · <b style="color:var(--ink)">${P.total}</b> · ${pct(P.total,ALL)}</span><span><i class="dot" style="background:var(--s2)"></i>Стажёры · <b style="color:var(--ink)">${T.total}</b> · ${pct(T.total,ALL)}</span></div>
+<p class="note">В среднем ${(P.total/P.by_name.length).toFixed(1).replace('.',',')} сессии на психолога и ${(T.total/T.by_name.length).toFixed(1).replace('.',',')} на стажёра за месяц.</p>`;
+
+groupBars('#weekBars',[{name:'Психологи',color:'var(--s1)',values:P.weekly_total},{name:'Стажёры',color:'var(--s2)',values:T.weekly_total}]);
+(()=>{let t=`<table><thead><tr><th>Неделя</th><th>Дней</th><th>Психологи</th><th>в день</th><th>Δ</th><th>Стажёры</th><th>в день</th><th>Δ</th><th>Всего</th><th>в день</th><th>Δ</th></tr></thead><tbody>`;
+  let pp=null,pt=null,pa=null;
+  W.forEach((w,i)=>{const p=P.weekly_total[i]/w.days,tt=T.weekly_total[i]/w.days,a=p+tt;const f=v=>v.toFixed(1).replace('.',',');
+    t+=`<tr><td>${wlabel(w)}</td><td>${w.days}</td><td>${P.weekly_total[i]}</td><td>${f(p)}</td><td>${delta(p,pp)}</td><td>${T.weekly_total[i]}</td><td>${f(tt)}</td><td>${delta(tt,pt)}</td><td><b>${P.weekly_total[i]+T.weekly_total[i]}</b></td><td>${f(a)}</td><td>${delta(a,pa)}</td></tr>`;pp=p;pt=tt;pa=a});
+  t+=`<tr class="tot"><td>Октябрь</td><td>31</td><td>${P.total}</td><td>${(P.total/31).toFixed(1).replace('.',',')}</td><td></td><td>${T.total}</td><td>${(T.total/31).toFixed(1).replace('.',',')}</td><td></td><td>${ALL}</td><td>${(ALL/31).toFixed(1).replace('.',',')}</td><td></td></tr></tbody></table>`;$('#weekTable').innerHTML=t})();
+dayLine('#dayLine',[{name:'Психологи',color:'var(--s1)',values:P.daily},{name:'Стажёры',color:'var(--s2)',values:T.daily}]);
+
+/* психологи */
+$('#psyEyebrow').textContent=`${P.total} сессий · ${P.by_name.length} специалистов · среднее ${(P.total/P.by_name.length).toFixed(1).replace('.',',')} на специалиста`;
+hbars('#psyRank',simple(P.by_name,'var(--s1)'),{shareOf:P.total});
+(()=>{const v=P.by_name.map(x=>x[1]);const sum=k=>v.slice(0,k).reduce((a,b)=>a+b,0);const med=v.length%2?v[(v.length-1)/2]:(v[v.length/2-1]+v[v.length/2])/2;
+  hbars('#psyConc',[[`Топ-5 из ${v.length}`,sum(5)],[`Топ-10 из ${v.length}`,sum(10)],[`Остальные ${v.length-10}`,P.total-sum(10)]].map(([l,x])=>({label:l,total:x,parts:[{v:x,color:'var(--s1)'}]})),{shareOf:P.total,max:P.total});
+  $('#psyConc').insertAdjacentHTML('beforeend',`<p class="note" style="margin:12px 0 0">Медиана — ${String(med).replace('.',',')} сессий на специалиста; разброс от ${v[v.length-1]} до ${v[0]}.</p>`)})();
+hbars('#psyKinds',simple(P.kinds,'var(--s4)'),{shareOf:P.total,unit:'строк'});
+$('#psyPackNote').innerHTML=`${P.pack_rows} строк — покупка пакета на 5 или 10 консультаций. Каждый пакет учтён как одна строка.`;
+heat('#psyHeat',P.weekly_by_name,P.by_name.map(x=>x[0]),'var(--s1)');
+
+/* стажёры */
+$('#trEyebrow').textContent=`${T.total} сессий · ${T.by_name.length} стажёров · среднее ${(T.total/T.by_name.length).toFixed(1).replace('.',',')} на стажёра`;
+hbars('#trRank',simple(T.by_name,'var(--s2)'),{shareOf:T.total});
+heat('#trHeat',T.weekly_by_name,T.by_name.map(x=>x[0]),'var(--s2)');
+hbars('#trUtm',D.tr_utm_source.map(([l,v])=>({label:'utm_source: '+l,total:v,parts:[{v,color:l==='Не указан'?'var(--faint)':'var(--s2)'}]})),{shareOf:T.total});
+$('#trUtmCombo').innerHTML=`<table><thead><tr><th>source / medium / campaign</th><th>Сессий</th></tr></thead><tbody>${D.tr_utm_combo.map(([k,v])=>`<tr><td>${esc(k)}</td><td>${v}</td></tr>`).join('')}</tbody></table>`;
+
+/* новые обращения */
+const utmKnown=N.utm_source.filter(x=>x[0]!=='Не указан').reduce((a,x)=>a+x[1],0);
+const one=(N.leads_per_deal.find(x=>x[0]===1)||[0,0])[1];
+tiles('#newKpis',[
+  {lab:'Новые обращения',num:N.total,sub:'сделок в таблице',hl:1},
+  {lab:'Заявок внутри сделок',num:N.leads_total,sub:`в среднем ${(N.leads_total/N.total).toFixed(1).replace('.',',')} на сделку`},
+  {lab:'Сделки из одной заявки',num:one,sub:pct(one,N.total)+' сделок'},
+  {lab:'Источник не указан',num:N.total-utmKnown,sub:`${pct(N.total-utmKnown,N.total)} сделок без utm_source`}
+]);
+$('#newTot2').textContent=N.total;
+const typeColor=l=>l.startsWith('Несколько')?'var(--faint)':'var(--s3)';
+hbars('#newType',N.by_type.map(([l,v])=>({label:l,total:v,parts:[{v,color:typeColor(l)}]})),{shareOf:N.total,unit:'сделок'});
+hbars('#newTouch',N.touch.map(([l,v])=>({label:l,total:v,parts:[{v,color:'var(--s3)'}]})),{shareOf:N.total,max:N.total,unit:'сделок'});
+hbars('#newUtm',N.utm_source.map(([l,v])=>({label:l,total:v,parts:[{v,color:l==='Не указан'?'var(--faint)':'var(--s3)'}]})),{shareOf:N.total,unit:'сделок'});
+hbars('#newLeads',N.leads_per_deal.map(([k,v])=>({label:`${k} ${k===1?'заявка':k<5?'заявки':'заявок'}`,total:v,parts:[{v,color:'var(--s3)'}]})),{shareOf:N.total,unit:'сделок'});
+
+/* промокоды */
+tiles('#promoKpis',[
+  {lab:'Сессий с промокодом',num:PR.psy_rows+PR.tr_rows,sub:`${pct(PR.psy_rows+PR.tr_rows,ALL)} всех сессий`,hl:1},
+  {lab:'У психологов',num:PR.psy_rows,sub:`${pct(PR.psy_rows,P.total)} сессий психологов`},
+  {lab:'У стажёров',num:PR.tr_rows,sub:`${pct(PR.tr_rows,T.total)} сессий стажёров`},
+  {lab:'Разных промокодов',num:PR.codes.length,sub:`самый частый — ${PR.codes[0][0]} (${PR.codes[0][1]+PR.codes[0][2]})`}
+]);
+hbars('#promoRank',PR.codes.map(([c,a,b])=>({label:c,total:a+b,parts:[{v:a,color:'var(--s1)',name:'Психологи'},{v:b,color:'var(--s2)',name:'Стажёры'}]})),{shareOf:PR.psy_rows+PR.tr_rows,unit:'сес.'});
+groupBars('#promoWeek',[{name:'Психологи',color:'var(--s1)',values:PR.weekly_psy},{name:'Стажёры',color:'var(--s2)',values:PR.weekly_tr}]);
+$('#promoShare').innerHTML=`<table><thead><tr><th>Неделя</th><th>Психологи</th><th>Стажёры</th></tr></thead><tbody>${W.map((w,i)=>`<tr><td>${wlabel(w)}</td><td>${PR.weekly_psy[i]} из ${P.weekly_total[i]} · <b>${pct(PR.weekly_psy[i],P.weekly_total[i],0)}</b></td><td>${PR.weekly_tr[i]} из ${T.weekly_total[i]} · <b>${pct(PR.weekly_tr[i],T.weekly_total[i],0)}</b></td></tr>`).join('')}</tbody></table>`;
+
+/* выводы */
+(()=>{const f=v=>v.toFixed(1).replace('.',',');const pd=P.weekly_total.map((v,i)=>v/W[i].days),td=T.weekly_total.map((v,i)=>v/W[i].days);
+ const v=P.by_name.map(x=>x[1]),top5=v.slice(0,5).reduce((a,b)=>a+b,0),t4=T.by_name.slice(0,4).reduce((a,x)=>a+x[1],0);
+ const ty=Object.fromEntries(N.by_type),pw=PR.weekly_psy.map((x,i)=>x/P.weekly_total[i]*100);
+ $('#facts').innerHTML=[
+ `За октябрь проведено <b>${ALL}</b> сессий: <b>${P.total}</b> у психологов и <b>${T.total}</b> у стажёров. Психологи ведут <b>${pct(P.total,ALL,0)}</b> нагрузки.`,
+ `У психологов после спада 5–11 октября (${f(pd[1])} сессии в день против ${f(pd[0])} в первые дни месяца) темп вырос до ${f(pd[2])} в день 12–18 октября и затем держался на уровне ${f(pd[3])}–${f(pd[4])}. У стажёров среднее в день менялось в пределах ${f(Math.min(...td))}–${f(Math.max(...td))}, самое высокое — в неполную последнюю неделю.`,
+ `Больше всего сессий у психологов ${P.by_name.slice(0,3).map(x=>`${x[0]} (${x[1]})`).join(', ')}. На топ-5 из ${v.length} приходится ${pct(top5,P.total,0)} сессий — нагрузка распределена довольно равномерно.`,
+ `У стажёров лидируют ${T.by_name.slice(0,4).map(x=>`${x[0]} (${x[1]})`).join(', ')} — вместе ${pct(t4,T.total,0)} сессий стажёров. У троих стажёров меньше 7 сессий за месяц.`,
+ `Новых обращений — <b>${N.total}</b> сделок (${N.leads_total} заявок). Чаще всего сделка приходит только с личной страницы психолога (${ty['Личная страница психолога']||0}) или со страницы записи к стажёрам (${ty['Запись к стажёрам (/trainee1)']||0}). В ${pct(N.total-one,N.total,0)} сделок больше одной заявки.`,
+ `Рекламный источник (utm_source) известен только для ${utmKnown} из ${N.total} сделок (gemini, telegram). Оценить вклад каналов по этим данным нельзя.`,
+ `Промокоды есть в ${pct(PR.psy_rows,P.total,0)} сессий психологов и в ${pct(PR.tr_rows,T.total,0)} сессий стажёров. У психологов доля росла с ${pw[0].toFixed(0)}% в первую неделю до ${Math.max(...pw.slice(3)).toFixed(0)}% в конце месяца. Лидер — ${PR.codes[0][0]} (${PR.codes[0][1]+PR.codes[0][2]}).`
+ ].map(x=>`<li>${x}</li>`).join('')})();
+</script>
