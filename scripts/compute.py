@@ -40,17 +40,17 @@ P_PACK = re.compile(r"^\s*Пакет (\d+) .*?консультаций - (\d+)x\
 
 def parse_psy(text):
     m = P_BOOK.match(text)
-    if m: return norm_name(m.group(1)), "Запись на время", 1
+    if m: return norm_name(m.group(1)), "Индивидуальная", 1
     m = P_PACK.match(text)
     if m: return norm_name(m.group(3)), "Пакет консультаций", int(m.group(2))
     m = P_PAY.match(text)
     if m:
         kind = m.group(1)
         k = ("Семейная" if "семейн" in kind else "Детская" if "детск" in kind
-             else "Очная" if "очн" in kind else "Консультация")
-        return norm_name(m.group(2)), "Оплата: " + k, int(m.group(3))
+             else "Очная" if "очн" in kind else "Индивидуальная")
+        return norm_name(m.group(2)), k, int(m.group(3))
     if not re.search(r"\d", text):
-        return norm_name(text), "Только имя специалиста", 1
+        return norm_name(text), "Индивидуальная", 1
     raise ValueError("Не распознана строка: " + text)
 
 def main(psy_path, tr_path, new_path):
@@ -162,16 +162,16 @@ def main(psy_path, tr_path, new_path):
     def utm_src(u):
         q = parse_qs(urlparse(u.split("#")[0]).query)
         return q.get("utm_source", [None])[0]
-    deal_type = Counter(); touch = Counter(); src = Counter(); leads_per = Counter()
+    # источник обращения определяется по ПЕРВОЙ ссылке в сделке
+    deal_type = Counter(); first_path = Counter(); src = Counter(); leads_per = Counter()
     for urls in deals:
-        types = {page_type(u) for u in urls}
-        deal_type[types.pop() if len(types) == 1 else "Несколько типов страниц"] += 1
-        for t in {page_type(u) for u in urls}: touch[t] += 1
-        s = sorted({utm_src(u) for u in urls} - {None})
-        src[" + ".join(s) if s else "Не указан"] += 1
+        first = urls[0]
+        deal_type[page_type(first)] += 1
+        first_path["/" + urlparse(first).path.strip("/")] += 1
+        src[utm_src(first) or "Не указан"] += 1
         leads_per[len(urls)] += 1
     out["new"] = dict(total=len(deals), leads_total=sum(len(u) for u in deals),
-                      by_type=deal_type.most_common(), touch=touch.most_common(),
+                      by_type=deal_type.most_common(), first_path=first_path.most_common(),
                       utm_source=src.most_common(), leads_per_deal=sorted(leads_per.items()))
     json.dump(out, sys.stdout, ensure_ascii=False, indent=1)
 

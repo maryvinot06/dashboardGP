@@ -88,42 +88,12 @@ footer{margin-top:56px;font-size:12.5px;color:var(--faint)}
 <header class="top">
   <div class="brand">Good Point<i>аналитика</i></div>
   <nav class="toc" aria-label="Разделы">
-    <a href="#data">Данные</a><a href="#overview">Обзор</a><a href="#psy">Психологи</a><a href="#tr">Стажёры</a><a href="#new">Обращения</a><a href="#promo">Промокоды</a><a href="#summary">Выводы</a>
+    <a href="#overview">Обзор</a><a href="#psy">Психологи</a><a href="#tr">Стажёры</a><a href="#new">Обращения</a><a href="#promo">Промокоды</a><a href="#summary">Выводы</a>
   </nav>
 </header>
 
 <h1>Октябрь 2026<span>сессии, обращения, промокоды</span></h1>
-<p class="lede">Отчёт собран из трёх выгрузок: оплаты психологов, записи к стажёрам и сделки по новым клиентам. <span class="period">Период данных: <b id="periodTxt"></b></span></p>
-
-<section id="data">
-  <h2>Что в исходных таблицах</h2>
-  <p class="note">Перед расчётами разобрана структура каждого файла. Ниже — что представляет одна строка и какие показатели из неё можно получить.</p>
-  <div class="card scroll" style="margin-top:14px">
-    <table class="src">
-      <thead><tr><th>Таблица</th><th style="text-align:left">Столбцы</th><th style="text-align:left">Одна строка</th><th style="text-align:left">Даты</th><th>Строк</th></tr></thead>
-      <tbody>
-        <tr><td><b>Психологи</b></td><td style="text-align:left;white-space:normal">Дата создания · Дата записи 1 (услуга + специалист) · PROMOCODE · COMMENT (пусто) · REFERER</td><td style="text-align:left;white-space:normal">Запись об оплате/записи к психологу. Имя специалиста извлечено из текста «Дата записи 1»</td><td style="text-align:left;white-space:normal">«Дата создания», 01–31.10.2026</td><td id="srcPsy"></td></tr>
-        <tr><td><b>Стажёры</b></td><td style="text-align:left;white-space:normal">Этап сделки (= имя стажёра) · Дата создания · PROMOCODE · DELIVERY_PRICE (пусто) · REFERER · utm_content/medium/campaign/source/term</td><td style="text-align:left;white-space:normal">Сессия у стажёра</td><td style="text-align:left;white-space:normal">«Дата создания», 01–31.10.2026</td><td id="srcTr"></td></tr>
-        <tr><td><b>Новые клиенты</b></td><td style="text-align:left;white-space:normal">Один столбец «Сделки» — список адресов страниц, с которых пришли заявки</td><td style="text-align:left;white-space:normal">Сделка (карточка обращения); внутри может быть 1–5 заявок</td><td style="text-align:left;white-space:normal"><b>Дат нет</b></td><td id="srcNew"></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="grid g2" style="margin-top:16px">
-    <div class="card"><h3>Что можно рассчитать</h3>
-      <ul class="facts note" style="color:var(--ink)">
-        <li>Сессии психологов и стажёров: всего, по специалистам, по неделям и дням октября.</li>
-        <li>Новые обращения: число сделок и заявок, тип страницы, с которой пришла заявка, UTM-источник из адреса.</li>
-        <li>Промокоды: в таблицах психологов и стажёров, с датами.</li>
-      </ul></div>
-    <div class="card"><h3>Принятые допущения</h3>
-      <ul class="facts note" style="color:var(--ink)">
-        <li>Одна строка = одна сессия. Строка с покупкой пакета консультаций тоже считается одной записью (один пакет = одна строка) и на отдельные сессии не раскладывается.</li>
-        <li>Динамика строится по «Дате создания» записи: у части строк дата самой сессии не указана.</li>
-        <li>Объединены варианты написания одного специалиста (подтверждено): «настя осипова» → Анастасия Осипова, «Даша/Дарья Бахтеева», «Ксюша/Ксения Карпова», регистр букв («АННА СКОМОРОХ»).</li>
-        <li>Цены из выгрузки в отчёт не включены.</li>
-      </ul></div>
-  </div>
-</section>
+<p class="lede">Отчёт собран из трёх выгрузок: оплаты психологов, записи к стажёрам и новые контакты. <span class="period">Период данных: <b id="periodTxt"></b></span></p>
 
 <section id="overview">
   <h2>1. Общая статистика</h2>
@@ -150,7 +120,7 @@ footer{margin-top:56px;font-size:12.5px;color:var(--faint)}
     <div class="card"><h3>Рейтинг по числу сессий</h3><p class="cap">Сессий за октябрь и доля от всех сессий психологов</p><div id="psyRank"></div></div>
     <div class="grid" style="align-content:start">
       <div class="card"><h3>Концентрация нагрузки</h3><p class="cap">Сколько сессий приходится на лидеров</p><div id="psyConc"></div></div>
-      <div class="card"><h3>Типы строк в таблице психологов</h3><p class="cap">Каждая строка считается одной сессией</p><div id="psyKinds"></div><p class="note" id="psyPackNote"></p></div>
+      <div class="card"><h3>Типы консультаций</h3><p class="cap">Записи с одним именем специалиста или только временем записи учтены как индивидуальные</p><div id="psyKinds"></div><p class="note" id="psyPackNote"></p></div>
     </div>
   </div>
   <div class="card scroll" style="margin-top:16px"><h3>Динамика по неделям</h3><p class="cap">Сессии каждого психолога по неделям октября. Чем насыщеннее цвет, тем больше сессий. * — неполная неделя</p><div id="psyHeat"></div></div>
@@ -169,15 +139,15 @@ footer{margin-top:56px;font-size:12.5px;color:var(--faint)}
 
 <section id="new">
   <h2>4. Новые обращения</h2>
-  <div class="eyebrow">Таблица новых клиентов · одна строка = одна сделка</div>
+  <div class="eyebrow">Одна строка = новый контакт и все его заявки за месяц</div>
   <div class="grid g4" id="newKpis"></div>
   <div class="grid g2" style="margin-top:16px">
-    <div class="card"><h3>С какой страницы пришла сделка</h3><p class="cap">Если все заявки сделки пришли со страниц одного типа — сделка отнесена к нему; если с разных — «Несколько типов страниц»</p><div id="newType"></div></div>
-    <div class="card"><h3>Охват страниц</h3><p class="cap">В скольких сделках встречается хотя бы одна заявка со страницы этого типа. Одна сделка может попасть в несколько строк, поэтому сумма больше <span id="newTot2"></span></p><div id="newTouch"></div></div>
+    <div class="card"><h3>Откуда пришёл новый контакт</h3><p class="cap">Тип страницы, с которой человек оставил первую заявку в октябре</p><div id="newType"></div></div>
+    <div class="card"><h3>Страницы первой заявки</h3><p class="cap">Конкретные адреса на good-point.ru, с которых пришла первая заявка</p><div id="newTouch"></div></div>
   </div>
   <div class="grid g2" style="margin-top:16px">
-    <div class="card"><h3>Источник привлечения (utm_source)</h3><p class="cap">Метка utm_source из адресов заявок. Если метки нет — «Не указан»</p><div id="newUtm"></div></div>
-    <div class="card"><h3>Заявок в одной сделке</h3><p class="cap">Сколько адресов «Lead from / Заявка с» записано в одной сделке</p><div id="newLeads"></div></div>
+    <div class="card"><h3>Источник привлечения (utm_source)</h3><p class="cap">Метка utm_source в адресе первой заявки. Если метки нет — «Не указан»</p><div id="newUtm"></div></div>
+    <div class="card"><h3>Заявок от одного контакта</h3><p class="cap">Сколько заявок оставил новый контакт за октябрь</p><div id="newLeads"></div></div>
   </div>
   <p class="note" style="margin-top:14px">В таблице новых клиентов нет дат, поэтому динамику обращений по месяцам и неделям и изменения в структуре источников во времени построить нельзя. Тип страницы показывает, где человек оставил заявку, а не рекламный канал, через который он пришёл.</p>
 </section>
@@ -208,7 +178,7 @@ footer{margin-top:56px;font-size:12.5px;color:var(--faint)}
       <ul class="facts">
         <li>Все таблицы содержат только октябрь 2026: помесячную динамику и сравнение с прошлым месяцем построить нельзя.</li>
         <li>В таблице новых клиентов нет дат — нет динамики обращений и источников во времени.</li>
-        <li>utm_source есть только в адресах части заявок; у большинства сделок источник не указан. Тип страницы — это место заявки, а не канал привлечения.</li>
+        <li>utm_source есть только в адресах части заявок; у большинства контактов источник не указан. Источник определяется по первой заявке; тип страницы — это место заявки, а не канал привлечения.</li>
         <li>Нет идентификаторов клиентов: уникальных и повторных клиентов не считали, записи между таблицами не сопоставляли.</li>
         <li>Одна строка считается одной записью. 14 строк психологов — покупка пакета на 5 или 10 консультаций; каждая учтена как одна строка, сколько сессий из пакета уже проведено, по таблице не видно.</li>
         <li>Динамика идёт по дате создания записи. Для 22 записей «на время» сессия назначена на другой день, в том числе на 2 ноября.</li>
@@ -316,13 +286,12 @@ function delta(cur,prev){if(prev==null)return '<span class="note">—</span>';co
 /* ---------- рендер ---------- */
 const P=D.psy,T=D.tr,N=D.new,PR=D.promo, ALL=P.total+T.total;
 $('#periodTxt').textContent='1–31 октября 2026';
-$('#srcPsy').textContent=P.total;$('#srcTr').textContent=T.total;$('#srcNew').textContent=N.total;
 
 tiles('#kpis',[
   {lab:'Все сессии центра',num:fmt(ALL),sub:`психологи + стажёры`,hl:1},
   {lab:'Сессии психологов',num:fmt(P.total),sub:`<i class="dot" style="background:var(--s1)"></i>${pct(P.total,ALL)} · ${P.by_name.length} специалистов`},
   {lab:'Сессии стажёров',num:fmt(T.total),sub:`<i class="dot" style="background:var(--s2)"></i>${pct(T.total,ALL)} · ${T.by_name.length} стажёров`},
-  {lab:'Новые обращения',num:fmt(N.total),sub:`сделок · в них ${N.leads_total} заявок. Не входят в число сессий`}
+  {lab:'Новые обращения',num:fmt(N.total),sub:`новых контактов · ${N.leads_total} заявок. Не входят в число сессий`}
 ]);
 $('#ratio').innerHTML=`<div class="ratio"><div style="width:${P.total/ALL*100}%;background:var(--s1)" data-tip="Психологи: ${P.total} (${pct(P.total,ALL)})"></div><div style="width:${T.total/ALL*100}%;background:var(--s2)" data-tip="Стажёры: ${T.total} (${pct(T.total,ALL)})"></div></div>
 <div class="legend" style="justify-content:space-between"><span><i class="dot" style="background:var(--s1)"></i>Психологи · <b style="color:var(--ink)">${P.total}</b> · ${pct(P.total,ALL)}</span><span><i class="dot" style="background:var(--s2)"></i>Стажёры · <b style="color:var(--ink)">${T.total}</b> · ${pct(T.total,ALL)}</span></div>
@@ -342,7 +311,7 @@ hbars('#psyRank',simple(P.by_name,'var(--s1)'),{shareOf:P.total});
 (()=>{const v=P.by_name.map(x=>x[1]);const sum=k=>v.slice(0,k).reduce((a,b)=>a+b,0);const med=v.length%2?v[(v.length-1)/2]:(v[v.length/2-1]+v[v.length/2])/2;
   hbars('#psyConc',[[`Топ-5 из ${v.length}`,sum(5)],[`Топ-10 из ${v.length}`,sum(10)],[`Остальные ${v.length-10}`,P.total-sum(10)]].map(([l,x])=>({label:l,total:x,parts:[{v:x,color:'var(--s1)'}]})),{shareOf:P.total,max:P.total});
   $('#psyConc').insertAdjacentHTML('beforeend',`<p class="note" style="margin:12px 0 0">Медиана — ${String(med).replace('.',',')} сессий на специалиста; разброс от ${v[v.length-1]} до ${v[0]}.</p>`)})();
-hbars('#psyKinds',simple(P.kinds,'var(--s4)'),{shareOf:P.total,unit:'строк'});
+hbars('#psyKinds',simple(P.kinds,'var(--s4)'),{shareOf:P.total,unit:'сес.'});
 $('#psyPackNote').innerHTML=`${P.pack_rows} строк — покупка пакета на 5 или 10 консультаций. Каждый пакет учтён как одна строка.`;
 heat('#psyHeat',P.weekly_by_name,P.by_name.map(x=>x[0]),'var(--s1)');
 
@@ -357,17 +326,15 @@ $('#trUtmCombo').innerHTML=`<table><thead><tr><th>source / medium / campaign</th
 const utmKnown=N.utm_source.filter(x=>x[0]!=='Не указан').reduce((a,x)=>a+x[1],0);
 const one=(N.leads_per_deal.find(x=>x[0]===1)||[0,0])[1];
 tiles('#newKpis',[
-  {lab:'Новые обращения',num:N.total,sub:'сделок в таблице',hl:1},
-  {lab:'Заявок внутри сделок',num:N.leads_total,sub:`в среднем ${(N.leads_total/N.total).toFixed(1).replace('.',',')} на сделку`},
-  {lab:'Сделки из одной заявки',num:one,sub:pct(one,N.total)+' сделок'},
-  {lab:'Источник не указан',num:N.total-utmKnown,sub:`${pct(N.total-utmKnown,N.total)} сделок без utm_source`}
+  {lab:'Новые контакты',num:N.total,sub:'за октябрь',hl:1},
+  {lab:'Заявок от них',num:N.leads_total,sub:`в среднем ${(N.leads_total/N.total).toFixed(1).replace('.',',')} на контакт`},
+  {lab:'Одна заявка',num:one,sub:pct(one,N.total)+' контактов'},
+  {lab:'Источник не указан',num:N.total-utmKnown,sub:`${pct(N.total-utmKnown,N.total)} контактов без utm_source`}
 ]);
-$('#newTot2').textContent=N.total;
-const typeColor=l=>l.startsWith('Несколько')?'var(--faint)':'var(--s3)';
-hbars('#newType',N.by_type.map(([l,v])=>({label:l,total:v,parts:[{v,color:typeColor(l)}]})),{shareOf:N.total,unit:'сделок'});
-hbars('#newTouch',N.touch.map(([l,v])=>({label:l,total:v,parts:[{v,color:'var(--s3)'}]})),{shareOf:N.total,max:N.total,unit:'сделок'});
-hbars('#newUtm',N.utm_source.map(([l,v])=>({label:l,total:v,parts:[{v,color:l==='Не указан'?'var(--faint)':'var(--s3)'}]})),{shareOf:N.total,unit:'сделок'});
-hbars('#newLeads',N.leads_per_deal.map(([k,v])=>({label:`${k} ${k===1?'заявка':k<5?'заявки':'заявок'}`,total:v,parts:[{v,color:'var(--s3)'}]})),{shareOf:N.total,unit:'сделок'});
+hbars('#newType',N.by_type.map(([l,v])=>({label:l,total:v,parts:[{v,color:'var(--s3)'}]})),{shareOf:N.total,unit:'конт.'});
+(()=>{const top=N.first_path.filter(x=>x[1]>1),rest=N.first_path.filter(x=>x[1]<=1);const items=top.map(([l,v])=>({label:l,total:v,parts:[{v,color:'var(--s3)'}]}));if(rest.length)items.push({label:`Другие (${rest.length} стр. по 1 контакту)`,total:rest.length,parts:[{v:rest.length,color:'var(--faint)'}]});hbars('#newTouch',items,{shareOf:N.total,unit:'конт.'})})();
+hbars('#newUtm',N.utm_source.map(([l,v])=>({label:l,total:v,parts:[{v,color:l==='Не указан'?'var(--faint)':'var(--s3)'}]})),{shareOf:N.total,unit:'конт.'});
+hbars('#newLeads',N.leads_per_deal.map(([k,v])=>({label:`${k} ${k===1?'заявка':k<5?'заявки':'заявок'}`,total:v,parts:[{v,color:'var(--s3)'}]})),{shareOf:N.total,unit:'конт.'});
 
 /* промокоды */
 tiles('#promoKpis',[
@@ -383,14 +350,14 @@ $('#promoShare').innerHTML=`<table><thead><tr><th>Неделя</th><th>Псих�
 /* выводы */
 (()=>{const f=v=>v.toFixed(1).replace('.',',');const pd=P.weekly_total.map((v,i)=>v/W[i].days),td=T.weekly_total.map((v,i)=>v/W[i].days);
  const v=P.by_name.map(x=>x[1]),top5=v.slice(0,5).reduce((a,b)=>a+b,0),t4=T.by_name.slice(0,4).reduce((a,x)=>a+x[1],0);
- const ty=Object.fromEntries(N.by_type),pw=PR.weekly_psy.map((x,i)=>x/P.weekly_total[i]*100);
+ const nt=N.by_type,pw=PR.weekly_psy.map((x,i)=>x/P.weekly_total[i]*100);
  $('#facts').innerHTML=[
  `За октябрь проведено <b>${ALL}</b> сессий: <b>${P.total}</b> у психологов и <b>${T.total}</b> у стажёров. Психологи ведут <b>${pct(P.total,ALL,0)}</b> нагрузки.`,
  `У психологов после спада 5–11 октября (${f(pd[1])} сессии в день против ${f(pd[0])} в первые дни месяца) темп вырос до ${f(pd[2])} в день 12–18 октября и затем держался на уровне ${f(pd[3])}–${f(pd[4])}. У стажёров среднее в день менялось в пределах ${f(Math.min(...td))}–${f(Math.max(...td))}, самое высокое — в неполную последнюю неделю.`,
  `Больше всего сессий у психологов ${P.by_name.slice(0,3).map(x=>`${x[0]} (${x[1]})`).join(', ')}. На топ-5 из ${v.length} приходится ${pct(top5,P.total,0)} сессий — нагрузка распределена довольно равномерно.`,
  `У стажёров лидируют ${T.by_name.slice(0,4).map(x=>`${x[0]} (${x[1]})`).join(', ')} — вместе ${pct(t4,T.total,0)} сессий стажёров. У троих стажёров меньше 7 сессий за месяц.`,
- `Новых обращений — <b>${N.total}</b> сделок (${N.leads_total} заявок). Чаще всего сделка приходит только с личной страницы психолога (${ty['Личная страница психолога']||0}) или со страницы записи к стажёрам (${ty['Запись к стажёрам (/trainee1)']||0}). В ${pct(N.total-one,N.total,0)} сделок больше одной заявки.`,
- `Рекламный источник (utm_source) известен только для ${utmKnown} из ${N.total} сделок (gemini, telegram). Оценить вклад каналов по этим данным нельзя.`,
+ `Новых контактов — <b>${N.total}</b>, они оставили ${N.leads_total} заявок. По первой заявке чаще всего приходят ${nt.slice(0,2).map(x=>`со страницы «${x[0]}» (${x[1]}, ${pct(x[1],N.total,0)})`).join(' и ')}. ${pct(N.total-one,N.total,0)} контактов оставили больше одной заявки за месяц.`,
+ `Рекламный источник (utm_source) в первой заявке указан только у ${utmKnown} из ${N.total} контактов (${N.utm_source.filter(x=>x[0]!=='Не указан').map(x=>x[0]).join(', ')}). Оценить вклад каналов по этим данным нельзя.`,
  `Промокоды есть в ${pct(PR.psy_rows,P.total,0)} сессий психологов и в ${pct(PR.tr_rows,T.total,0)} сессий стажёров. У психологов доля росла с ${pw[0].toFixed(0)}% в первую неделю до ${Math.max(...pw.slice(3)).toFixed(0)}% в конце месяца. Лидер — ${PR.codes[0][0]} (${PR.codes[0][1]+PR.codes[0][2]}).`
  ].map(x=>`<li>${x}</li>`).join('')})();
 </script>
